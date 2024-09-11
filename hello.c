@@ -1,4 +1,4 @@
-// sparse_matrix_assignment.c
+
 // This program represents a sparse matrix using a 2D array in C and includes test cases.
 
 #include <stdio.h>
@@ -32,30 +32,36 @@ int main() {
 
 // Function to convert a matrix into sparse matrix format
 void createSparseMatrix(int sparseMatrix[][3], int originalMatrix[][N], int rows, int cols) {
-    //WRITE THE FUNCTION DESCRIPTION HERE
-    
+    int nonZeroCount = 0;
 
+    // First row of sparseMatrix stores the dimensions and non-zero element count
+    sparseMatrix[0][0] = rows;
+    sparseMatrix[0][1] = cols;
+    sparseMatrix[0][2] = 0;  // Will update later with non-zero element count
 
+    // Traverse the original matrix
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (originalMatrix[i][j] != 0) {
+                nonZeroCount++;
+                sparseMatrix[nonZeroCount][0] = i;  // Row index
+                sparseMatrix[nonZeroCount][1] = j;  // Column index
+                sparseMatrix[nonZeroCount][2] = originalMatrix[i][j];  // Value
+            }
+        }
+    }
 
-
-
-
-
-
+    // Update non-zero element count in the first row
+    sparseMatrix[0][2] = nonZeroCount;
 }
 
 // Function to print sparse matrix representation
 void printSparseMatrix(int sparseMatrix[][3], int nonZeroCount) {
-    //WRITE THE FUNCTION DESCRIPTION HERE
-    
-
-
-
-
-
-
-
-
+    printf("Sparse Matrix Representation:\n");
+    printf("Rows Cols Value\n");
+    for (int i = 0; i <= nonZeroCount; i++) {
+        printf("%4d %4d %4d\n", sparseMatrix[i][0], sparseMatrix[i][1], sparseMatrix[i][2]);
+    }
 }
 
 //--------------------------------------------------------
